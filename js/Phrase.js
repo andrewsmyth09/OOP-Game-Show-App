@@ -1,6 +1,8 @@
-/* Treehouse FSJS Techdegree
- * Project 4 - OOP Game App
- * Phrase.js */
+// SELECTORS
+
+const phraseSection = document.querySelector('#phrase ul');
+
+// Class for phrases
 
 class Phrase {
     constructor(phrase) {
@@ -10,16 +12,19 @@ class Phrase {
     addPhraseToDisplay() {
         let displayString = '';
         this.phrase.split('').forEach(letter => {
-            letter.match(/[a-z]/i) ? 
-            displayString += `<li class="hide letter ${letter}">${letter}</li>` 
-            : 
-            displayString += '<li class="space"> </li>';
+            if(letter.match(/[a-z]/i)) {  
+                displayString += `<li class="hide letter ${letter}">${letter}</li>` 
+            } else {
+                displayString += '<li class="space"> </li>';
+            }
         });
-        return displayString;
+        phraseSection.innerHTML = displayString;
     };
 
     checkLetter() {
-        return 'checkLetter method works!'
+        phraseSection.addEventListener('click', (event)=> {
+            console.log('Clicked')
+        })
     };
 
     showMatchedLetter() {
