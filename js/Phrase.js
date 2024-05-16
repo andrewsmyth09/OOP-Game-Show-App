@@ -14,7 +14,7 @@ class Phrase {
         this.phrase.split('').forEach(letter => {
             if(letter.match(/[a-z]/i)) {  
                 displayString += `<li class="hide letter ${letter}">${letter}</li>` 
-            } else {
+            } else if(letter.match(/\s/)) {
                 displayString += '<li class="space"> </li>';
             }
         });
@@ -32,4 +32,4 @@ class Phrase {
     };
 };
 
-let test = new Phrase('This is a drag.');
+let test = new Phrase('This! is a drag999.');
