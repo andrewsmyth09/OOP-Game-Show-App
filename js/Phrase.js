@@ -22,9 +22,18 @@ class Phrase {
     };
 
     checkLetter() {
-        phraseSection.addEventListener('click', (event)=> {
-            console.log('Clicked')
-        })
+        const letterList = phraseSection.querySelectorAll('li');
+        document.addEventListener('keyup', (event)=> {
+            console.log(event.key.toLowerCase())
+            const userKey = event.key.toLowerCase();
+            letterList.forEach(letter => {
+                if(letter.textContent.includes(userKey)) {
+                    console.log('true')
+                } else {
+                    console.log('false')
+                }
+            });
+        });
     };
 
     showMatchedLetter() {
