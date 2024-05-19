@@ -22,22 +22,18 @@ class Phrase {
     };
 
     checkLetter() {
-        const letterList = phraseSection.querySelectorAll('li');
         document.addEventListener('keyup', (event)=> {
-            console.log(event.key.toLowerCase())
             const userKey = event.key.toLowerCase();
-            letterList.forEach(letter => {
+            phraseSection.querySelectorAll('li').forEach(letter => {
                 if(letter.textContent.includes(userKey)) {
-                    console.log('true')
-                } else {
-                    console.log('false')
-                }
+                    this.showMatchedLetter(letter);
+                };
             });
         });
     };
 
-    showMatchedLetter() {
-        return 'showMatchedLetter method works!'
+    showMatchedLetter(letter) {
+        letter.className = `show letter ${letter.textContent}`;
     };
 };
 
