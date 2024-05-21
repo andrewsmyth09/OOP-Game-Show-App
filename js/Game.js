@@ -11,6 +11,8 @@ class Game {
             new Phrase('Best of both worlds')
         ];
         this.activePhrase = null;
+        this.phraseLength = null;
+        this.correctGuesses = 0;
     };
 
     startGame() {
@@ -22,28 +24,43 @@ class Game {
 
     getRandomPhrase() {
         const randomNumber = Math.floor(Math.random() * this.phrases.length);
+        this.phraseLength = this.phrases[randomNumber].phrase.replace(/[^a-zA-Z0-9]/g, '').length;
         return this.phrases[randomNumber];
     };
 
     handleInteraction() {
         buttonGroup.addEventListener('click', (event) => {
             const selectedBtn = event.target;
-            if(selectedBtn.nodeName === 'BUTTON') {
+            if (selectedBtn.nodeName === 'BUTTON') {
                 selectedBtn.disabled = true;
                 const userKey = selectedBtn.textContent;
-                const isMatched = this.activePhrase.checkLetter(userKey);
+                const matchingElements = this.activePhrase.checkLetter(userKey);
 
-                if(!isMatched) {
+                if (matchingElements.length === 0) {
                     selectedBtn.className = 'wrong';
                     this.removeLife();
                 } else {
                     selectedBtn.className = 'chosen';
-                }
+                    matchingElements.forEach(element => {
+                        this.activePhrase.showMatchedLetter(element);
+                        this.correctGuesses += 1;
+                    });
+                    this.checkForWin();
+                };
             };
-        }); 
+        });
     };
-    removeLife() {};
-    checkForWin() {};
+
+    removeLife() {
+        imgElements[this.missed].src = '/images/lostHeart.png';
+        this.missed += 1;
+        if(this.missed === 5) this.gameOver();
+    };
+    checkForWin() {
+        if(this.correctGuesses === this.phraseLength) {
+            console.log('Winner!');
+        }
+    };
     gameOver() {};
 };
 

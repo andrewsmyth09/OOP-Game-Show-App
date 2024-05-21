@@ -2,6 +2,8 @@
 
 const phraseSection = document.querySelector('#phrase ul');
 const buttonGroup = document.querySelector('#qwerty');
+const imgGroup = document.querySelectorAll('.tries img');
+const imgElements = Array.from(imgGroup);
 
 // Class for phrases
 
@@ -23,14 +25,13 @@ class Phrase {
     };
 
     checkLetter(userKey) {
-        let found = false;
+        const matchingElements = [];
         phraseSection.querySelectorAll('li').forEach(letter => {
-            if(letter.textContent.includes(userKey)) {
-                this.showMatchedLetter(letter);
-                found = true;
-            };
+            if (letter.textContent.includes(userKey)) {
+                matchingElements.push(letter);
+            }
         });
-        return found;
+        return matchingElements;
     };
 
     showMatchedLetter(letter) {
