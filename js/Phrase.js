@@ -1,6 +1,7 @@
 // SELECTORS
 
 const phraseSection = document.querySelector('#phrase ul');
+const buttonGroup = document.querySelector('#qwerty');
 
 // Class for phrases
 
@@ -21,15 +22,15 @@ class Phrase {
         phraseSection.innerHTML = displayString;
     };
 
-    checkLetter() {
-        document.addEventListener('keyup', (event)=> {
-            const userKey = event.key.toLowerCase();
-            phraseSection.querySelectorAll('li').forEach(letter => {
-                if(letter.textContent.includes(userKey)) {
-                    this.showMatchedLetter(letter);
-                };
-            });
+    checkLetter(userKey) {
+        let found = false;
+        phraseSection.querySelectorAll('li').forEach(letter => {
+            if(letter.textContent.includes(userKey)) {
+                this.showMatchedLetter(letter);
+                found = true;
+            };
         });
+        return found;
     };
 
     showMatchedLetter(letter) {

@@ -17,6 +17,7 @@ class Game {
         document.querySelector("#overlay").style.display = "none";
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
+        this.handleInteraction();
     };
 
     getRandomPhrase() {
@@ -25,7 +26,21 @@ class Game {
     };
 
     handleInteraction() {
-        this.activePhrase.checkLetter();
+        buttonGroup.addEventListener('click', (event) => {
+            const selectedBtn = event.target;
+            if(selectedBtn.nodeName === 'BUTTON') {
+                selectedBtn.disabled = true;
+                const userKey = selectedBtn.textContent;
+                const isMatched = this.activePhrase.checkLetter(userKey);
+
+                if(!isMatched) {
+                    selectedBtn.className = 'wrong';
+                    this.removeLife();
+                } else {
+                    selectedBtn.className = 'chosen';
+                }
+            };
+        }); 
     };
     removeLife() {};
     checkForWin() {};
@@ -34,4 +49,3 @@ class Game {
 
 const game = new Game();
 game.startGame();
-game.handleInteraction();
