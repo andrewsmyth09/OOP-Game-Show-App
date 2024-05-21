@@ -1,5 +1,8 @@
 // SELECTORS
 
+const startBtn = document.querySelector('#btn__reset');
+const overLay = document.querySelector("#overlay");
+const gameOverMessage = document.querySelector('#game-over-message');
 const phraseSection = document.querySelector('#phrase ul');
 const buttonGroup = document.querySelector('#qwerty');
 const imgGroup = document.querySelectorAll('.tries img');

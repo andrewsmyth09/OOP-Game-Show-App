@@ -1,4 +1,3 @@
-// document.querySelector("#overlay").style.display = "none";
 
 class Game {
     constructor() {
@@ -16,7 +15,7 @@ class Game {
     };
 
     startGame() {
-        document.querySelector("#overlay").style.display = "none";
+        overLay.style.display = "none";
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
         this.handleInteraction();
@@ -57,12 +56,16 @@ class Game {
         if(this.missed === 5) this.gameOver();
     };
     checkForWin() {
-        if(this.correctGuesses === this.phraseLength) {
-            console.log('Winner!');
+        if(this.correctGuesses === this.phraseLength) this.gameOver();
+    };
+    gameOver() {
+        overLay.style.display = 'block';
+        if(this.missed === 5) {
+            overLay.className = 'lose';
+            gameOverMessage.textContent = '😞 Sorry, you lose. Better luck next time! 🍀';
+        } else {
+            overLay.className = 'win';
+            gameOverMessage.textContent = '🎉 Congratulations, you win! Enjoy your victory! 🏆';
         }
     };
-    gameOver() {};
 };
-
-const game = new Game();
-game.startGame();
