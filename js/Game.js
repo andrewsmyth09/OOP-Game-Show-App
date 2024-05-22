@@ -10,7 +10,7 @@ class Game {
         ];
         this.activePhrase = null;
         this.phraseLength = null;
-        this.missedGuesses = 0;
+        this.missed = 0;
         this.correctGuesses = 0;
     };
 
@@ -57,9 +57,9 @@ class Game {
 
     // Changes the heart image every time a user makes an incorrect guess.
     removeLife() {
-        imgElements[this.missedGuesses].src = '/images/lostHeart.png';
-        this.missedGuesses += 1;
-        if(this.missedGuesses === 5) this.gameOver();
+        imgElements[this.missed].src = '/images/lostHeart.png';
+        this.missed += 1;
+        if(this.missed === 5) this.gameOver();
     };
 
     // Checks to see if the user has guessed all the letters in the hidden phrase.
@@ -73,7 +73,7 @@ class Game {
         overLay.style.animation = 'fadeIn 1s ease-in-out';
         chosenKeys = document.querySelectorAll('.chosen');
         wrongKeys = document.querySelectorAll('.wrong');
-        if(this.missedGuesses === 5) {
+        if(this.missed === 5) {
             overLay.className = 'lose';
             startBtn.textContent = 'Try again';
             gameOverMessage.textContent = '😞 Sorry, you lose. Better luck next time! 🍀';
