@@ -7,14 +7,15 @@ const phraseSection = document.querySelector('#phrase ul');
 const buttonGroup = document.querySelector('#qwerty');
 const imgGroup = document.querySelectorAll('.tries img');
 const imgElements = Array.from(imgGroup);
-
-// Class for phrases
+let chosenKeys = null;
+let wrongKeys = null;
 
 class Phrase {
     constructor(phrase) {
         this.phrase = phrase.toLowerCase();
     };
 
+    // Function to display the hidden phrase at the start of the game.
     addPhraseToDisplay() {
         let displayString = '';
         this.phrase.split('').forEach(letter => {
@@ -27,6 +28,7 @@ class Phrase {
         phraseSection.innerHTML = displayString;
     };
 
+    // Stores letters that match one or more of the hidden phrases in an array.
     checkLetter(userKey) {
         const matchingElements = [];
         phraseSection.querySelectorAll('li').forEach(letter => {
@@ -37,9 +39,15 @@ class Phrase {
         return matchingElements;
     };
 
+    // Updates the phrase screen to show a matched letter.
     showMatchedLetter(letter) {
         letter.className = `show letter ${letter.textContent}`;
     };
-};
 
-let test = new Phrase('This! is a drag999.');
+    // Removes the hidden phrase.
+    phraseRemover() {
+        while (phraseSection.firstChild) {
+            phraseSection.removeChild(phraseSection.firstChild);
+        };
+    };
+};

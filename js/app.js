@@ -1,8 +1,17 @@
-/* Treehouse FSJS Techdegree
- * Project 4 - OOP Game App
- * app.js */
+// A global initializer to hold the game instance.
+let game;
 
+// Gets the game started and resets any values from a previous game.
 startBtn.addEventListener('click', ()=> {
-    const game = new Game();
+    game = new Game();
     game.startGame();
+    chosenKeys = null;
+    wrongKeys = null;
+});
+
+// Listens for any user clicks on the on and offscreen keyboards.
+buttonGroup.addEventListener('click', (event) => {
+    if (event.target.className === 'key') {
+        game.handleInteraction(event.target);
+    };
 });
