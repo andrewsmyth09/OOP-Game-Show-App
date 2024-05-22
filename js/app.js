@@ -15,3 +15,12 @@ buttonGroup.addEventListener('click', (event) => {
         game.handleInteraction(event.target);
     };
 });
+
+document.addEventListener('keyup', (event) => {
+    const key = event.key.toLowerCase(); 
+    const onscreenKeys = Array.from(document.querySelectorAll('.key'), displayKey => {
+        if(displayKey.textContent === key) {
+            game.handleInteraction(displayKey);
+        }
+    });
+});

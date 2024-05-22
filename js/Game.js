@@ -38,6 +38,7 @@ class Game {
     */
     handleInteraction(selectedBtn) {
         selectedBtn.disabled = true;
+        selectedBtn.style.transition = "transform 0.5s, background-color 0.5s";
         const userKey = selectedBtn.textContent;
         const matchingElements = this.activePhrase.checkLetter(userKey);
 
@@ -69,13 +70,16 @@ class Game {
     // Ends the game with a final message based on the user's final result.
     gameOver() {
         overLay.style.display = 'block';
+        overLay.style.animation = 'fadeIn 1s ease-in-out';
         chosenKeys = document.querySelectorAll('.chosen');
         wrongKeys = document.querySelectorAll('.wrong');
         if(this.missedGuesses === 5) {
             overLay.className = 'lose';
+            startBtn.textContent = 'Try again';
             gameOverMessage.textContent = '😞 Sorry, you lose. Better luck next time! 🍀';
         } else {
             overLay.className = 'win';
+            startBtn.textContent = 'Play again!';
             gameOverMessage.textContent = '🎉 Congratulations, you win! Enjoy your victory! 🏆';
         }
     };

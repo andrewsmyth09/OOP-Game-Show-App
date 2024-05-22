@@ -42,6 +42,7 @@ class Phrase {
     // Updates the phrase screen to show a matched letter.
     showMatchedLetter(letter) {
         letter.className = `show letter ${letter.textContent}`;
+        letter.style.transition = "color 0.7s, border-bottom 0.7s";
     };
 
     // Removes the hidden phrase.
