@@ -86,7 +86,11 @@ class Game {
 
     // Resets the keys on the screen to their original class.
     resetKeys(keys) {
-        if(keys !== null) Array.from(keys, key => key.className = 'key');
+        if(keys !== null) Array.from(keys, key => {
+            key.className = 'key';
+            key.disabled = false;
+            key.removeAttribute('style');
+        });
     };
 
     // Resets the images on the screen to their original look.
